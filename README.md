@@ -1,4 +1,4 @@
-# Linkerd-cred-exp-check
+# Linkerd-cert-exp-check
 Linkerd Control Plane TLS Credential Expiration Check and Alerting for AWS EKS using AWS SNS
 
 ## INTRODUCTION
