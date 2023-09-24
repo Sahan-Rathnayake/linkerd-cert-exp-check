@@ -6,7 +6,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: cert-exp-check-sa
-  namespace: devops
+  namespace: linkerd
 roleRef:
   kind: Role
   name: cert-exp-check-role

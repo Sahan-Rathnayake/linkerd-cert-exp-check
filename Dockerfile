@@ -1,6 +1,5 @@
 FROM amd64/alpine:latest
 
-ARG ARCH
 ARG KUBECTL_VERSION=1.24.13
 
 RUN apk add --update --no-cache curl ca-certificates bash git openssl coreutils 
