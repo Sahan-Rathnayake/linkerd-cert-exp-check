@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cert-exp-check-cron
+  namespace: linkerd
+spec:
+  schedule: "10 30 * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: SERVICE_ACCOUNT_NAME
+          containers:
+          - name: cert-exp-check
+            image: f4113n/linkerd-cert-check:1.0.0
+            imagePullPolicy: Always
+            command:
+            - /bin/bash
+            - -c
+            - /opt/scripts/cert-exp-check.sh -e "<ENVIRONMENT>" -p "<PROJECT>" -t "arn:aws:sns:ap-southeast-1:XXXXXXXXXXXX:Linkerd-Certificate-Expiration"
+          restartPolicy: OnFailure

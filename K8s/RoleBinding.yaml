@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: cert-exp-check-rolebinding
+  namespace: linkerd
+subjects:
+- kind: ServiceAccount
+  name: SERVICE_ACCOUNT_NAME
+  namespace: linkerd
+roleRef:
+  kind: Role
+  name: cert-exp-check-role
+  apiGroup: ""
