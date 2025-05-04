@@ -1,0 +1,14 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: {{ .Values.role.name }}-rolebinding
+  namespace: {{ .Values.linkerd.namespace }}
+{{ include "linkerd-cert-exp-check.labels" . | indent 2 }}
+subjects:
+- kind: ServiceAccount
+  name: {{ .Values.serviceAccount.name }}
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: Role
+  name: {{ .Values.role.name }}
+  apiGroup: ""

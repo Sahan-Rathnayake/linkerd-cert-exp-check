@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: {{ .Values.cronJob.name }}
+  namespace: {{ .Release.Namespace }}
+{{ include "linkerd-cert-exp-check.labels" . | indent 2 }}
+spec:
+  schedule: {{ .Values.cronJob.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: {{ .Values.cronJob.successfulJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ .Values.cronJob.failedJobsHistoryLimit }}
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: {{ .Values.serviceAccount.name }}
+          containers:
+          - name: cert-exp-check
+            image: {{ .Values.cronJob.image.repository }}/{{ .Values.cronJob.image.name }}:{{ .Values.cronJob.image.tag }}
+            imagePullPolicy: {{ .Values.cronJob.image.pullPolicy }}
+            command:
+            - /bin/bash
+            - -c
+            - /opt/scripts/cert-exp-check.sh -e "<ENVIRONMENT>" -p "<PROJECT>" -t "arn:aws:sns:ap-southeast-1:XXXXXXXXXXXX:Linkerd-Certificate-Expiration"
+          restartPolicy: {{ .Values.cronJob.restartPolicy }}

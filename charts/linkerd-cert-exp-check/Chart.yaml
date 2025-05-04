@@ -1,0 +1,7 @@
+apiVersion: v2
+name: linkerd-cert-exp-check
+description: A Helm chart for Linkerd certificate expiration check
+
+type: application
+
+version: 0.1.0
