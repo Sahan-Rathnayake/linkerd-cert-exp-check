@@ -1,0 +1,26 @@
+# This file is used to set default values for the Helm chart.
+# It can be overridden by providing a custom values file or using the --set flag during installation.
+
+# Default values for the Linkerd certificate expiration check Helm chart.
+serviceAccount:
+  name: linkerd-cert-exp-check-serviceaccount
+  roleArn: arn:aws:iam::123456789012:role/foo
+  stsRegionalEndpoints: true
+
+linkerd:
+  namespace: linkerd
+
+role:
+  name: linkerd-cert-exp-check-role
+
+cronJob:
+  name: linkerd-cert-exp-check-cronjob
+  schedule: 0 0 * * *
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  restartPolicy: OnFailure
+  image:
+    repository: f4113n
+    name: linkerd-cert-check
+    tag: 1.0.0
+    pullPolicy: IfNotPresent
