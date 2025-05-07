@@ -1,5 +1,5 @@
 # This file is used to set default values for the Helm chart.
-# It can be overridden by providing a custom values file or using the --set flag during installation.
+# It can be overridden by providing custom values or using the --set flag during installation.
 
 # Default values for the Linkerd certificate expiration check Helm chart.
 serviceAccount:
@@ -22,5 +22,13 @@ cronJob:
   image:
     repository: f4113n
     name: linkerd-cert-check
-    tag: 1.0.0
+    tag: 1.1.0
     pullPolicy: IfNotPresent
+  env:
+    k8sVersion: 1.30.0
+    threshold: 45 # Number of days before expiration to check
+  sns:
+    awsRegion: ap-southeast-1
+    topicArn: arn:aws:sns:ap-southeast-1:123456789012:linkerd-cert-exp-check
+    subject: Linkerd Certificate Expiration Check
+    message: Linkerd certificate expiration check has been triggered
