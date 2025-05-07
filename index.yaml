@@ -2,6 +2,15 @@ apiVersion: v1
 entries:
   linkerd-cert-exp-check:
   - apiVersion: v2
+    created: "2025-05-07T19:31:50.329118817Z"
+    description: A Helm chart for Linkerd certificate expiration check
+    digest: 76aaabe205e761ef4e84566f1fb60098a90287e02fa6227c0932ecb1c9eba80d
+    name: linkerd-cert-exp-check
+    type: application
+    urls:
+    - https://github.com/Sahan-Rathnayake/linkerd-cert-exp-check/releases/download/linkerd-cert-exp-check-0.2.0/linkerd-cert-exp-check-0.2.0.tgz
+    version: 0.2.0
+  - apiVersion: v2
     created: "2025-05-04T18:12:16.155872239Z"
     description: A Helm chart for Linkerd certificate expiration check
     digest: 6ff39434c4e4c4483de22a72bd7cd3efefb4d557496911ebca9402fb242c8425
@@ -10,4 +19,4 @@ entries:
     urls:
     - https://github.com/Sahan-Rathnayake/linkerd-cert-exp-check/releases/download/linkerd-cert-exp-check-0.1.0/linkerd-cert-exp-check-0.1.0.tgz
     version: 0.1.0
-generated: "2025-05-04T18:12:16.155916032Z"
+generated: "2025-05-07T19:31:50.329127503Z"
