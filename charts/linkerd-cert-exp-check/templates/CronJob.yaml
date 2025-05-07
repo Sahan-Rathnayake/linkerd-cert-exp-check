@@ -18,8 +18,19 @@ spec:
           - name: cert-exp-check
             image: {{ .Values.cronJob.image.repository }}/{{ .Values.cronJob.image.name }}:{{ .Values.cronJob.image.tag }}
             imagePullPolicy: {{ .Values.cronJob.image.pullPolicy }}
-            command:
-            - /bin/bash
-            - -c
-            - /opt/scripts/cert-exp-check.sh -e "<ENVIRONMENT>" -p "<PROJECT>" -t "arn:aws:sns:ap-southeast-1:XXXXXXXXXXXX:Linkerd-Certificate-Expiration"
+            env:
+            - name: KUBECTL_VERSION
+              value: {{ .Values.cronJob.env.k8sVersion}}
+            - name: LINKERD_NAMESPACE
+              value: {{ .Values.linkerd.Namespace | quote }}
+            - name: THRESHOLD
+              value: {{ .Values.cronJob.env.threshold }}
+            - name: AWS_REGION
+              value: {{ .Values.cronJob.sns.awsRegion | quote }}
+            - name: TOPIC_ARN
+              value: {{ .Values.cronJob.sns.topicArn | quote }}
+            - name: SUBJECT
+              value: {{ .Values.cronJob.sns.subject | quote }}
+            - name: MESSAGE
+              value: {{ .Values.cronJob.sns.message | quote }}
           restartPolicy: {{ .Values.cronJob.restartPolicy }}
