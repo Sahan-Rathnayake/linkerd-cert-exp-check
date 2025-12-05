@@ -22,7 +22,7 @@ spec:
             - name: KUBECTL_VERSION
               value: {{ .Values.cronJob.env.k8sVersion}}
             - name: LINKERD_NAMESPACE
-              value: {{ .Values.linkerd.Namespace | quote }}
+              value: {{ .Values.linkerd.namespace | quote }}
             - name: THRESHOLD
               value: {{ .Values.cronJob.env.threshold }}
             - name: AWS_REGION
