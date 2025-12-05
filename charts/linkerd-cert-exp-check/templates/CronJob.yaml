@@ -24,7 +24,7 @@ spec:
             - name: LINKERD_NAMESPACE
               value: {{ .Values.linkerd.namespace | quote }}
             - name: THRESHOLD
-              value: {{ .Values.cronJob.env.threshold }}
+              value: {{ .Values.cronJob.env.threshold | quote }}
             - name: AWS_REGION
               value: {{ .Values.cronJob.sns.awsRegion | quote }}
             - name: TOPIC_ARN
